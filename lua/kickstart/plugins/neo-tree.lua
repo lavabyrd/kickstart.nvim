@@ -3,12 +3,13 @@ return {
   version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
+    -- Optionally include devicons if needed
+    'nvim-tree/nvim-web-devicons',
   },
   cmd = 'Neotree',
   keys = {
-    { '<leader>e', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
+    { '<leader>e', ':Neotree reveal<CR>', desc = 'NeoTree reveal', noremap = true, silent = true },
   },
   opts = {
     filesystem = {
@@ -16,7 +17,6 @@ return {
         mappings = {
           ['h'] = 'close_node',
           ['l'] = 'open',
-          ['<leader>e'] = 'close_window',
         },
       },
     },
@@ -31,7 +31,7 @@ return {
       end,
     })
 
-    -- Auto-close Neo-tree if it's the last window AND a file was opened before
+    -- Auto-close NeoTree if it's the last window AND a file was opened
     vim.api.nvim_create_autocmd('BufEnter', {
       group = vim.api.nvim_create_augroup('NeoTreeAutoClose', { clear = true }),
       callback = function()
